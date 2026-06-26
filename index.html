@@ -55,7 +55,7 @@
   .burger.open span:nth-child(3){bottom:auto;top:50%;transform:translateY(-50%) rotate(-45deg);}
 
   /* ---------- hero ---------- */
-  .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(165deg,#0E3450 0%, var(--navy) 55%, var(--navy-deep) 100%);color:var(--white);padding-top:140px;padding-bottom:120px;}
+  .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(165deg,rgba(14,52,80,.88) 0%,rgba(10,42,64,.82) 55%,rgba(7,28,44,.93) 100%),url('https://images.unsplash.com/photo-WScpndZFrOM?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;color:var(--white);padding-top:140px;padding-bottom:120px;}
   .hero-inner{max-width:760px;}
   .hero h1{font-size:clamp(38px,6vw,64px);line-height:1.08;color:var(--white);font-weight:400;}
   .hero h1 em{font-style:normal;color:#9FC4DC;}
@@ -109,6 +109,15 @@
   .contact-item span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:8px;}
   .contact-item b{display:block;font-size:15px;color:var(--navy-deep);font-weight:500;max-width:240px;}
 
+  /* ---------- gallery ---------- */
+  .gallery{padding-bottom:140px;}
+  .gallery-grid{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:232px 232px;gap:14px;margin-top:0;}
+  .gallery-main{grid-row:1/3;}
+  .gallery-fig{position:relative;overflow:hidden;margin:0;border-radius:2px;}
+  .gallery-fig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+  .gallery-fig:hover img{transform:scale(1.04);}
+  .gallery-fig figcaption{position:absolute;bottom:0;left:0;right:0;padding:28px 20px 16px;background:linear-gradient(transparent,rgba(7,28,44,.72));font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.82);}
+
   /* ---------- footer ---------- */
   footer{padding:40px 0;border-top:1px solid var(--line);}
   .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--ink-soft);}
@@ -130,6 +139,10 @@
     section{padding:90px 0;}
     .stats{gap:40px;}
     .contact-row{gap:32px;}
+    .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:10px;}
+    .gallery-main{grid-row:auto;}
+    .gallery-grid .gallery-fig:first-child img{height:260px;}
+    .gallery-grid .gallery-fig img{height:200px;}
   }
 </style>
 
@@ -189,6 +202,29 @@
         <div class="stat"><b>2024</b><span>Mission opened</span></div>
         <div class="stat"><b>20+</b><span>Years of FSM&ndash;Switzerland relations</span></div>
         <div class="stat"><b>1st</b><span>FSM mission in Europe</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The Islands</p>
+        <h2>The places the Mission represents.</h2>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-fig gallery-main reveal">
+          <img src="https://images.unsplash.com/photo-g18MsEMgdNY?auto=format&fit=crop&w=1200&q=80" alt="Tropical hills and lagoon, Weno, Chuuk, Federated States of Micronesia" loading="lazy">
+          <figcaption>Weno, Chuuk &mdash; lush interior, Pacific horizon</figcaption>
+        </figure>
+        <figure class="gallery-fig reveal">
+          <img src="https://images.unsplash.com/photo-tWWCqIMiUmg?auto=format&fit=crop&w=800&q=80" alt="Coral reef, Chuuk Lagoon, FSM" loading="lazy">
+          <figcaption>Coral reefs, Chuuk Lagoon</figcaption>
+        </figure>
+        <figure class="gallery-fig reveal">
+          <img src="https://images.unsplash.com/photo-DV6W9GaAgZw?auto=format&fit=crop&w=800&q=80" alt="Diver exploring Chuuk Lagoon, Federated States of Micronesia" loading="lazy">
+          <figcaption>Chuuk Lagoon &mdash; one of the world's great dive sites</figcaption>
+        </figure>
       </div>
     </div>
   </section>

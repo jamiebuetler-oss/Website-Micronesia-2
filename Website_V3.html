@@ -1,0 +1,359 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --navy:#0A2A40;
+    --navy-deep:#06202F;
+    --sky:#BEE3EF;
+    --sky-deep:#7FBFD6;
+    --white:#FFFFFF;
+    --mist:#F4FAFB;
+    --green:#2F9E73;
+    --green-deep:#237A59;
+    --ink:#16222B;
+    --ink-soft:#56666E;
+    --line:rgba(10,42,64,0.12);
+    --serif:'Fraunces', serif;
+    --sans:'IBM Plex Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 32px;}
+  .wrap-narrow{max-width:660px;margin:0 auto;padding:0 32px;}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-0.01em;color:var(--navy-deep);}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--green);margin-bottom:18px;
+  }
+
+  /* ---------- header ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;padding:28px 0;transition:.3s ease;}
+  header.solid{padding:18px 0;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line);}
+  header.solid .brand-text strong, header.solid nav.links a{color:var(--navy-deep);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{width:26px;height:26px;}
+  .brand-text strong{font-family:var(--serif);font-size:15px;font-weight:500;color:var(--white);transition:color .3s;}
+  nav.links{display:flex;gap:38px;}
+  nav.links a{font-size:13.5px;color:var(--white);opacity:.9;transition:color .3s, opacity .2s;}
+  nav.links a:hover{opacity:1;}
+  .burger{display:none;width:26px;height:18px;position:relative;border:none;background:none;cursor:pointer;}
+  .burger span{position:absolute;left:0;right:0;height:1.5px;background:var(--white);transition:.25s;}
+  header.solid .burger span{background:var(--navy-deep);}
+  .burger span:nth-child(1){top:0;}
+  .burger span:nth-child(2){top:50%;transform:translateY(-50%);}
+  .burger span:nth-child(3){bottom:0;}
+  .burger.open span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){bottom:auto;top:50%;transform:translateY(-50%) rotate(-45deg);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    position:relative;color:var(--white);overflow:hidden;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(6,32,47,0.55) 0%, rgba(6,32,47,0.45) 45%, rgba(6,32,47,0.85) 100%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:640px;padding:0 32px;}
+  .hero .eyebrow{color:var(--sky);justify-content:center;display:flex;}
+  .hero h1{font-size:clamp(34px,5.5vw,54px);line-height:1.15;color:var(--white);font-weight:400;}
+  .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:1;opacity:.8;animation:bob 2.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+  /* ---------- accreditation strip ---------- */
+  .accred-strip{background:var(--navy-deep);padding:22px 0;}
+  .accred-strip .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:14px 28px;}
+  .accred-strip span{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);display:flex;align-items:center;gap:10px;}
+  .accred-strip span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green);}
+  .accred-strip span:first-child::before{display:none;}
+
+  /* ---------- generic section rhythm ---------- */
+  section{padding:130px 0;}
+  .section-head{margin-bottom:60px;}
+  .section-head h2{font-size:clamp(27px,3.4vw,36px);font-weight:400;line-height:1.2;}
+
+  /* ---------- about ---------- */
+  .about p{color:var(--ink-soft);font-size:17px;margin-bottom:18px;}
+  .about p:last-of-type{margin-bottom:0;}
+  .stats{display:flex;gap:60px;margin-top:56px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:var(--serif);font-size:32px;color:var(--navy-deep);font-weight:400;}
+  .stat span{font-size:13px;color:var(--ink-soft);}
+
+  /* ---------- gallery ---------- */
+  .gallery{background:var(--mist);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .gallery-item img{width:100%;height:280px;object-fit:cover;border-radius:2px;}
+  .gallery-cap{margin-top:14px;display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-soft);}
+  .gallery-cap b{color:var(--navy-deep);font-weight:500;font-size:13.5px;display:block;font-family:var(--serif);}
+
+  /* ---------- focus ---------- */
+  .focus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 56px;}
+  .focus-item h4{font-size:18px;color:var(--navy-deep);margin:16px 0 10px;font-weight:500;}
+  .focus-item p{font-size:14.5px;color:var(--ink-soft);max-width:380px;}
+  .focus-item .icon{width:26px;height:26px;color:var(--green);}
+
+  /* ---------- ambassador ---------- */
+  .ambassador{background:var(--navy);color:var(--white);}
+  .amb-row{display:flex;gap:48px;align-items:flex-start;}
+  .avatar{width:104px;height:104px;border-radius:50%;background:linear-gradient(155deg,var(--sky),var(--green));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;color:#fff;flex-shrink:0;}
+  .amb-copy h2{color:var(--white);font-size:clamp(24px,3vw,30px);font-weight:400;margin-bottom:6px;}
+  .amb-title{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--sky);text-transform:uppercase;margin-bottom:18px;display:block;}
+  .amb-copy p{color:#CBE2EA;font-size:15.5px;max-width:580px;margin-bottom:14px;}
+  .amb-copy p:last-child{margin-bottom:0;}
+
+  /* ---------- news ---------- */
+  .news-list{border-top:1px solid var(--line);}
+  .news-row{display:grid;grid-template-columns:110px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);}
+  .news-row .date{font-family:var(--mono);font-size:12.5px;color:var(--green-deep);padding-top:4px;}
+  .news-row h4{font-size:17px;color:var(--navy-deep);margin-bottom:6px;font-weight:500;}
+  .news-row p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--mist);}
+  .contact-row{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;margin-top:50px;padding-top:36px;border-top:1px solid var(--line);}
+  .contact-item span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:8px;}
+  .contact-item b{display:block;font-size:15px;color:var(--navy-deep);font-weight:500;max-width:240px;}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;padding:13px 26px;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:all .2s ease;}
+  .btn-primary{background:var(--green);color:var(--white);}
+  .btn-primary:hover{background:var(--green-deep);}
+
+  /* ---------- footer ---------- */
+  footer{padding:36px 0;border-top:1px solid var(--line);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-soft);}
+  .footer-row .brand-text strong{color:var(--navy-deep);}
+  .footer-links{display:flex;gap:22px;}
+  .footer-links a:hover{color:var(--navy-deep);}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .burger{display:block;}
+    nav.mobile-open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--navy-deep);padding:20px 32px 28px;gap:18px;}
+    nav.mobile-open a{font-size:15px;color:var(--white)!important;}
+    .focus-grid,.gallery-grid{grid-template-columns:1fr;gap:36px;}
+    .gallery-item img{height:220px;}
+    .amb-row{flex-direction:column;gap:24px;}
+    .news-row{grid-template-columns:1fr;gap:8px;}
+    section{padding:84px 0;}
+    .stats{gap:36px;}
+    .contact-row{gap:30px;}
+    .accred-strip .wrap{gap:10px 18px;}
+  }
+</style>
+
+<header id="siteHeader">
+  <div class="wrap nav-row">
+    <a href="#home" class="brand">
+      <svg class="brand-mark" viewBox="0 0 26 26">
+        <circle cx="13" cy="13" r="11.5" fill="none" stroke="#FFFFFF" stroke-width="1.1"/>
+        <path fill="#FFFFFF" transform="translate(13,7) scale(0.32) translate(-12,-12)" d="M12 2L14.9 8.6L22 9.3L16.5 14.1L18.2 21L12 17.3L5.8 21L7.5 14.1L2 9.3L9.1 8.6Z"/>
+      </svg>
+      <span class="brand-text"><strong>FSM Mission, Geneva</strong></span>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#about">Mission</a>
+      <a href="#focus">Focus</a>
+      <a href="#ambassador">Ambassador</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chuuk_Islands_from_ISS.jpg?width=1920" alt="Aerial view of Chuuk Lagoon islands, Federated States of Micronesia">
+    </div>
+    <div class="hero-inner">
+      <p class="eyebrow">Federated States of Micronesia</p>
+      <h1>Permanent Mission, Geneva.</h1>
+    </div>
+    <svg class="scroll-cue" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M5 9l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </section>
+
+  <section class="accred-strip">
+    <div class="wrap">
+      <span>United Nations &amp; International Organizations</span>
+      <span>World Health Organization</span>
+      <span>European Union</span>
+      <span>Swiss Confederation</span>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap-narrow">
+      <div class="reveal">
+        <p class="eyebrow">About the Mission</p>
+        <h2>A Pacific voice in the heart of multilateral Geneva.</h2>
+      </div>
+      <div class="reveal" style="margin-top:32px;">
+        <p>Opened on 22 April 2024, the Mission is the FSM's first diplomatic presence in Europe, representing the country across the United Nations system, the World Health Organization, the European Union and Switzerland.</p>
+        <p>As a low-lying Pacific Island nation, the FSM brings a distinct perspective to Geneva: ocean governance, climate resilience and the future of small island states.</p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b>2024</b><span>Mission opened</span></div>
+        <div class="stat"><b>20+</b><span>Years of FSM&ndash;Switzerland relations</span></div>
+        <div class="stat"><b>1st</b><span>FSM mission in Europe</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Glimpses</p>
+        <h2>The islands behind the Mission.</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nan_Madol_2.jpg?width=900" alt="Nan Madol, the ancient megalithic city on Pohnpei">
+          <div class="gallery-cap"><div><b>Nan Madol</b>Pohnpei</div><span>CC BY 2.0</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yap_Stone_Money.jpg?width=900" alt="Traditional rai stone money on Yap">
+          <div class="gallery-cap"><div><b>Rai Stone Money</b>Yap</div><span>Eric Guinther, CC BY-SA</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dublon_Island,_Chuuk,_Micronesia.jpg?width=900" alt="Dublon Island in Chuuk Lagoon">
+          <div class="gallery-cap"><div><b>Dublon Island</b>Chuuk</div><span>Matt Kieffer, CC BY-SA</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="focus" id="focus">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Priorities</p>
+        <h2>Where the Mission concentrates its work.</h2>
+      </div>
+      <div class="focus-grid">
+        <div class="focus-item reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0M3 12c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0" stroke-linecap="round"/></svg>
+          <h4>Ocean &amp; Climate</h4>
+          <p>Advancing climate finance, the high seas, and conservation of marine biodiversity beyond national jurisdiction.</p>
+        </div>
+        <div class="focus-item reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18Z"/></svg>
+          <h4>Human Rights</h4>
+          <p>Participating in the Universal Periodic Review and treaty body processes shaping the FSM's national reporting.</p>
+        </div>
+        <div class="focus-item reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>
+          <h4>Global Health</h4>
+          <p>Carrying the Asia-Pacific voice on the WHO Executive Council, with a focus on resilience and NCDs.</p>
+        </div>
+        <div class="focus-item reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round"/></svg>
+          <h4>Sustainable Development</h4>
+          <p>Tracking progress on the SDGs and the development needs of small island developing states.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ambassador" id="ambassador">
+    <div class="wrap">
+      <div class="amb-row">
+        <div class="reveal"><div class="avatar">AS</div></div>
+        <div class="amb-copy reveal">
+          <span class="amb-title">Permanent Representative</span>
+          <h2>H.E. Akillino H. Susaia</h2>
+          <p>Sworn in in Palikir, Pohnpei, before taking up his post in Geneva, Ambassador Susaia brings more than two decades of public service &mdash; including roles as FSM Consul General in Hawai&#8197;i and FSM Ambassador to China and the United States.</p>
+          <p>Under his leadership the Mission has focused on the UN human rights system, the WHO Executive Council, and ocean-governance negotiations such as the BBNJ Agreement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Updates</p>
+        <h2>From the Mission.</h2>
+      </div>
+      <div class="news-list">
+        <div class="news-row reveal">
+          <span class="date">Jan 2026</span>
+          <div><h4>FSM appears before the UN Human Rights Council's Universal Periodic Review</h4><p>The Mission led the delegation presenting the FSM's national report at the Palais des Nations.</p></div>
+        </div>
+        <div class="news-row reveal">
+          <span class="date">2025</span>
+          <div><h4>Continued engagement on ocean governance and the BBNJ Agreement</h4><p>The Mission joined side events on high-seas biodiversity with fellow Pacific states.</p></div>
+        </div>
+        <div class="news-row reveal">
+          <span class="date">2024</span>
+          <div><h4>Mission opens, marking the FSM's seat on the WHO Executive Council</h4><p>The FSM celebrated its first European mission and its Asia-Pacific representation at the WHO.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Contact</p>
+      <h2>Visit or write to the Mission.</h2>
+      <p style="color:var(--ink-soft);margin-top:18px;font-size:16px;">For accreditation, protocol, consular or media enquiries, reach the Mission directly.</p>
+      <div class="contact-row">
+        <div class="contact-item reveal"><span>Address</span><b>Spaces S&eacute;cheron, Chemin des Mines, 1202 Geneva</b></div>
+        <div class="contact-item reveal"><span>Telephone</span><b>+41 22 506 31 00</b></div>
+        <div class="contact-item reveal"><span>Email</span><b>mission.geneva@fsmgov.org</b></div>
+      </div>
+      <div style="margin-top:44px;">
+        <a class="btn btn-primary" href="mailto:mission.geneva@fsmgov.org">Email the Mission</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span class="brand-text"><strong>Federated States of Micronesia</strong> &mdash; Permanent Mission, Geneva</span>
+    <div class="footer-links">
+      <a href="https://gov.fm" target="_blank" rel="noopener">FSM Government</a>
+      <a href="#contact">Contact</a>
+      <span>&copy; 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => header.classList.toggle('solid', window.scrollY > 40));
+
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('mobile-open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('mobile-open');
+    burger.classList.remove('open');
+  }));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
